@@ -1,0 +1,499 @@
+@import "tailwindcss";
+
+@theme {
+  --font-display: 'Space Grotesk', sans-serif;
+  --font-sans: 'Inter', sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
+  --color-bg-main: #08090D;
+  --color-bg-secondary: #10121A;
+  --color-bg-card: #151824;
+  --color-accent-primary: #8B5CF6;
+  --color-accent-secondary: #38BDF8;
+  --color-text-primary: #F8FAFC;
+  --color-text-secondary: #94A3B8;
+}
+
+/* Ensure all headings and display classes use Space Grotesk */
+h1, h2, h3, h4, .font-\[\'Outfit\'\], .font-display {
+  font-family: 'Space Grotesk', sans-serif;
+  letter-spacing: -0.02em;
+}
+
+body {
+  font-family: 'Inter', sans-serif;
+  background-color: #08090D;
+  color: #F8FAFC;
+}
+
+/* Controlled CSS Scroll Snapping for Major Portfolio Sections */
+html {
+  scroll-behavior: smooth;
+  scroll-snap-type: y proximity;
+  scroll-padding-top: 5.5rem;
+}
+
+html.disable-scroll-snap {
+  scroll-snap-type: none !important;
+}
+
+.snap-section {
+  scroll-snap-align: start;
+  scroll-snap-stop: normal;
+  scroll-margin-top: 5.5rem;
+}
+
+footer {
+  scroll-snap-align: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+    scroll-snap-type: none;
+  }
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: #08090D;
+}
+::-webkit-scrollbar-thumb {
+  background: #151824;
+  border-radius: 4px;
+  border: 1px solid rgba(139, 92, 246, 0.2);
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #8B5CF6;
+}
+
+/* Background grid subtle texture */
+.bg-grid-pattern {
+  background-size: 44px 44px;
+  background-image: 
+    linear-gradient(to right, rgba(148, 163, 184, 0.04) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(148, 163, 184, 0.04) 1px, transparent 1px);
+}
+
+.bg-radial-gradient {
+  background: radial-gradient(circle at 50% 0%, rgba(139, 92, 246, 0.14) 0%, rgba(56, 189, 248, 0.05) 42%, transparent 72%);
+}
+
+/* Glassmorphism styling with #151824 card surface and hairline border */
+.glass-panel {
+  background: rgba(21, 24, 36, 0.78);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(148, 163, 184, 0.12);
+  box-shadow: 0 10px 36px -4px rgba(0, 0, 0, 0.48);
+  transition: background-color 0.35s ease, border-color 0.35s ease, box-shadow 0.35s ease, transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.glass-panel-hover {
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.glass-panel-hover:hover {
+  background: rgba(26, 30, 46, 0.92);
+  border-color: rgba(139, 92, 246, 0.48);
+  box-shadow: 0 18px 40px -12px rgba(139, 92, 246, 0.28), 0 0 24px 0 rgba(56, 189, 248, 0.14);
+}
+
+/* ========================================================
+   UNIFORM GLOBAL HOVER & CURRENT-SECTION INDICATOR SYSTEM
+   Ensures smooth background-color and text-shadow transitions
+   across all primary navigation links and action buttons
+   in both Deep Space and Cyberpunk Light themes.
+   ======================================================== */
+
+.nav-link-interactive,
+.btn-interactive,
+header nav a,
+button:not(:disabled) {
+  transition:
+    background-color 0.26s cubic-bezier(0.16, 1, 0.3, 1),
+    text-shadow 0.26s cubic-bezier(0.16, 1, 0.3, 1),
+    border-color 0.26s cubic-bezier(0.16, 1, 0.3, 1),
+    box-shadow 0.26s cubic-bezier(0.16, 1, 0.3, 1),
+    color 0.22s ease,
+    transform 0.22s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Primary Navigation Links: Hover State (Deep Space Default) */
+.nav-link-interactive:hover {
+  background-color: rgba(139, 92, 246, 0.18) !important;
+  border-color: rgba(56, 189, 248, 0.45) !important;
+  color: #F8FAFC !important;
+  text-shadow: 0 0 12px rgba(56, 189, 248, 0.65), 0 0 22px rgba(139, 92, 246, 0.45);
+  box-shadow: 0 4px 16px -3px rgba(139, 92, 246, 0.28), inset 0 0 10px rgba(56, 189, 248, 0.1);
+}
+
+/* Primary Navigation Links: Active / Current-Section State (Deep Space Default) */
+.nav-link-interactive.current-section,
+.nav-link-interactive[aria-current="page"] {
+  background-color: rgba(139, 92, 246, 0.25) !important;
+  border-color: rgba(56, 189, 248, 0.65) !important;
+  color: #38BDF8 !important;
+  text-shadow: 0 0 14px rgba(56, 189, 248, 0.75), 0 0 26px rgba(139, 92, 246, 0.5);
+  box-shadow: 0 6px 20px -3px rgba(139, 92, 246, 0.35), inset 0 0 14px rgba(56, 189, 248, 0.16);
+}
+
+/* Action Buttons Global Hover Feedback (Deep Space Default) */
+button:not(:disabled):hover,
+.btn-interactive:hover,
+section a[href]:hover {
+  text-shadow: 0 0 10px rgba(56, 189, 248, 0.5), 0 0 20px rgba(139, 92, 246, 0.35);
+}
+
+button:not(:disabled):not([class*="bg-gradient-to-r"]):hover,
+.btn-interactive:not([class*="bg-gradient-to-r"]):hover {
+  background-color: rgba(30, 36, 56, 0.92) !important;
+  border-color: rgba(56, 189, 248, 0.5) !important;
+  box-shadow: 0 6px 20px -4px rgba(139, 92, 246, 0.28), 0 0 14px rgba(56, 189, 248, 0.15);
+}
+
+/* ========================================================
+   CYBERPUNK LIGHT THEME SYSTEM
+   Ultra high-tech luminous palette: Frosted crystal glass,
+   electric holographic accents, crisp elevated surfaces,
+   and WCAG AAA contrast for typography and UI elements
+   ======================================================== */
+
+[data-theme="cyberpunk-light"] {
+  color-scheme: light;
+}
+
+/* Primary Navigation Links: Hover State (Cyberpunk Light) */
+[data-theme="cyberpunk-light"] .nav-link-interactive:hover {
+  background-color: rgba(6, 182, 212, 0.14) !important;
+  border-color: rgba(2, 132, 199, 0.48) !important;
+  color: #0369a1 !important;
+  text-shadow: 0 0 10px rgba(6, 182, 212, 0.35), 0 1px 2px rgba(15, 23, 42, 0.06);
+  box-shadow: 0 4px 14px -2px rgba(6, 182, 212, 0.18);
+}
+
+/* Primary Navigation Links: Active / Current-Section State (Cyberpunk Light) */
+[data-theme="cyberpunk-light"] .nav-link-interactive.current-section,
+[data-theme="cyberpunk-light"] .nav-link-interactive[aria-current="page"] {
+  background-color: rgba(6, 182, 212, 0.22) !important;
+  border-color: rgba(2, 132, 199, 0.7) !important;
+  color: #075985 !important;
+  text-shadow: 0 0 12px rgba(6, 182, 212, 0.42);
+  box-shadow: 0 6px 16px -3px rgba(6, 182, 212, 0.24), inset 0 0 10px rgba(6, 182, 212, 0.1);
+}
+
+/* Action Buttons Global Hover Feedback (Cyberpunk Light) */
+[data-theme="cyberpunk-light"] button:not(:disabled):hover,
+[data-theme="cyberpunk-light"] .btn-interactive:hover,
+[data-theme="cyberpunk-light"] section a[href]:hover {
+  text-shadow: 0 0 10px rgba(2, 132, 199, 0.32);
+}
+
+[data-theme="cyberpunk-light"] button:not(:disabled):not([class*="bg-gradient-to-r"]):hover,
+[data-theme="cyberpunk-light"] .btn-interactive:not([class*="bg-gradient-to-r"]):hover {
+  background-color: rgba(224, 242, 254, 0.92) !important;
+  border-color: rgba(2, 132, 199, 0.55) !important;
+  box-shadow: 0 6px 18px -4px rgba(2, 132, 199, 0.2);
+}
+
+/* Scrollbar in Cyberpunk Light */
+[data-theme="cyberpunk-light"] ::-webkit-scrollbar-track {
+  background: #f1f5f9;
+}
+[data-theme="cyberpunk-light"] ::-webkit-scrollbar-thumb {
+  background: #cbd5e1;
+}
+[data-theme="cyberpunk-light"] ::-webkit-scrollbar-thumb:hover {
+  background: #94a3b8;
+}
+
+/* Cyberpunk Light Glass Panels: Translucent frosted luminous glass with crisp cyan perimeter */
+[data-theme="cyberpunk-light"] .glass-panel {
+  background: rgba(255, 255, 255, 0.86) !important;
+  backdrop-filter: blur(16px) !important;
+  -webkit-backdrop-filter: blur(16px) !important;
+  border-color: rgba(6, 182, 212, 0.28) !important;
+  box-shadow: 0 10px 30px -5px rgba(6, 182, 212, 0.12), 0 0 24px 0 rgba(6, 182, 212, 0.08), 0 2px 8px -1px rgba(15, 23, 42, 0.04) !important;
+}
+
+[data-theme="cyberpunk-light"] .glass-panel-hover:hover {
+  background: rgba(255, 255, 255, 0.98) !important;
+  border-color: rgba(99, 102, 241, 0.55) !important;
+  box-shadow: 0 16px 36px -8px rgba(99, 102, 241, 0.2), 0 0 26px 2px rgba(6, 182, 212, 0.25) !important;
+}
+
+/* Cyberpunk Light Grid Pattern: Crisp holographic blueprint lines */
+[data-theme="cyberpunk-light"] .bg-grid-pattern {
+  background-size: 40px 40px;
+  background-image: 
+    linear-gradient(to right, rgba(6, 182, 212, 0.08) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(6, 182, 212, 0.08) 1px, transparent 1px) !important;
+}
+
+/* Cyberpunk Light Radial Gradient */
+[data-theme="cyberpunk-light"] .bg-radial-gradient {
+  background: radial-gradient(circle at 50% 0%, rgba(6, 182, 212, 0.16) 0%, rgba(168, 85, 247, 0.08) 40%, transparent 70%) !important;
+}
+
+/* Cyberpunk Light Section Background Adapters */
+[data-theme="cyberpunk-light"] .bg-\[\#05070f\]\/80,
+[data-theme="cyberpunk-light"] .bg-\[\#070b16\]\/75,
+[data-theme="cyberpunk-light"] .bg-\[\#070b16\]\/80 {
+  background-color: rgba(248, 250, 252, 0.78) !important;
+}
+
+[data-theme="cyberpunk-light"] .bg-\[\#04060d\] {
+  background-color: #f8fafc !important;
+  border-top-color: rgba(226, 232, 240, 0.9) !important;
+}
+
+[data-theme="cyberpunk-light"] .bg-\[\#070b16\] {
+  background-color: #ffffff !important;
+}
+
+/* Elevated Nested Cards (Codeforces stats, checkpoint items, philosophy box, roadmap detail) */
+[data-theme="cyberpunk-light"] .bg-slate-950\/60,
+[data-theme="cyberpunk-light"] .bg-slate-950\/70,
+[data-theme="cyberpunk-light"] .bg-slate-950\/80,
+[data-theme="cyberpunk-light"] .bg-slate-900\/60,
+[data-theme="cyberpunk-light"] .bg-slate-900\/70,
+[data-theme="cyberpunk-light"] .bg-slate-900\/80 {
+  background-color: rgba(248, 250, 252, 0.94) !important;
+  border-color: rgba(226, 232, 240, 0.95) !important;
+  box-shadow: 0 1px 3px 0 rgba(15, 23, 42, 0.05) !important;
+}
+
+[data-theme="cyberpunk-light"] .bg-slate-900\/90,
+[data-theme="cyberpunk-light"] .bg-slate-900\/95 {
+  background-color: rgba(255, 255, 255, 0.96) !important;
+  border-color: rgba(203, 213, 225, 0.9) !important;
+}
+
+[data-theme="cyberpunk-light"] .bg-slate-900 {
+  background-color: rgba(241, 245, 249, 0.95) !important;
+}
+
+[data-theme="cyberpunk-light"] .bg-slate-950 {
+  background-color: #ffffff !important;
+}
+
+[data-theme="cyberpunk-light"] .bg-slate-800 {
+  background-color: rgba(226, 232, 240, 0.85) !important;
+}
+
+/* Cyber borders */
+[data-theme="cyberpunk-light"] .border-slate-800,
+[data-theme="cyberpunk-light"] .border-slate-800\/80,
+[data-theme="cyberpunk-light"] .border-slate-800\/70,
+[data-theme="cyberpunk-light"] .border-slate-800\/60,
+[data-theme="cyberpunk-light"] .border-slate-700,
+[data-theme="cyberpunk-light"] .border-slate-700\/80,
+[data-theme="cyberpunk-light"] .border-slate-700\/60 {
+  border-color: rgba(203, 213, 225, 0.85) !important;
+}
+
+/* Typography contrast in Cyberpunk Light */
+[data-theme="cyberpunk-light"] h1,
+[data-theme="cyberpunk-light"] h2,
+[data-theme="cyberpunk-light"] h3,
+[data-theme="cyberpunk-light"] h4,
+[data-theme="cyberpunk-light"] h5 {
+  color: #0f172a !important;
+}
+
+[data-theme="cyberpunk-light"] .text-white:not([class*="bg-clip-text"]):not(button.bg-gradient-to-r):not(a.bg-gradient-to-r):not(.keep-white):not([class*="from-"]):not([class*="to-"]) {
+  color: #0f172a !important;
+}
+
+[data-theme="cyberpunk-light"] .text-slate-100 {
+  color: #0f172a !important;
+}
+[data-theme="cyberpunk-light"] .text-slate-200 {
+  color: #1e293b !important;
+}
+[data-theme="cyberpunk-light"] .text-slate-300 {
+  color: #334155 !important;
+}
+[data-theme="cyberpunk-light"] .text-slate-400 {
+  color: #475569 !important;
+}
+[data-theme="cyberpunk-light"] .text-slate-500 {
+  color: #64748b !important;
+}
+
+/* Electric cyan text becomes vivid cyber blue for AA/AAA contrast on light surfaces */
+[data-theme="cyberpunk-light"] .text-cyan-400 {
+  color: #0284c7 !important;
+}
+[data-theme="cyberpunk-light"] .text-cyan-300 {
+  color: #0369a1 !important;
+}
+[data-theme="cyberpunk-light"] .text-indigo-400 {
+  color: #4f46e5 !important;
+}
+[data-theme="cyberpunk-light"] .text-indigo-300 {
+  color: #4338ca !important;
+}
+[data-theme="cyberpunk-light"] .text-purple-400 {
+  color: #7c3aed !important;
+}
+[data-theme="cyberpunk-light"] .text-purple-300 {
+  color: #6d28d9 !important;
+}
+
+/* High-contrast gradient text in light mode */
+[data-theme="cyberpunk-light"] .bg-gradient-to-r.from-indigo-400.via-purple-300.to-cyan-300 {
+  background-image: linear-gradient(to right, #4f46e5, #7c3aed, #0284c7) !important;
+}
+
+/* Status Badges & Pills in Light Mode */
+[data-theme="cyberpunk-light"] .bg-cyan-950\/60,
+[data-theme="cyberpunk-light"] .bg-cyan-950\/70,
+[data-theme="cyberpunk-light"] .bg-cyan-950\/80 {
+  background-color: #ecfeff !important;
+  border-color: #a5f3fc !important;
+  color: #0e7490 !important;
+}
+
+[data-theme="cyberpunk-light"] .bg-indigo-950\/60,
+[data-theme="cyberpunk-light"] .bg-indigo-950\/40 {
+  background-color: #eef2ff !important;
+  border-color: #c7d2fe !important;
+  color: #3730a3 !important;
+}
+
+[data-theme="cyberpunk-light"] .bg-purple-950\/60 {
+  background-color: #faf5ff !important;
+  border-color: #e9d5ff !important;
+  color: #6b21a8 !important;
+}
+
+[data-theme="cyberpunk-light"] .bg-emerald-950\/70,
+[data-theme="cyberpunk-light"] .bg-emerald-950\/60 {
+  background-color: #ecfdf5 !important;
+  border-color: #a7f3d0 !important;
+  color: #065f46 !important;
+}
+
+[data-theme="cyberpunk-light"] .border-cyan-800\/60 {
+  border-color: #a5f3fc !important;
+}
+[data-theme="cyberpunk-light"] .border-indigo-800\/60 {
+  border-color: #c7d2fe !important;
+}
+[data-theme="cyberpunk-light"] .border-purple-800\/60 {
+  border-color: #e9d5ff !important;
+}
+[data-theme="cyberpunk-light"] .border-emerald-800\/60 {
+  border-color: #a7f3d0 !important;
+}
+
+[data-theme="cyberpunk-light"] .bg-amber-500\/20 {
+  background-color: #fffbeb !important;
+  border-color: #fde68a !important;
+  color: #92400e !important;
+}
+
+/* Clean form inputs and textareas */
+[data-theme="cyberpunk-light"] input,
+[data-theme="cyberpunk-light"] textarea {
+  background-color: #ffffff !important;
+  color: #0f172a !important;
+  border-color: #cbd5e1 !important;
+}
+
+[data-theme="cyberpunk-light"] input:focus,
+[data-theme="cyberpunk-light"] textarea:focus {
+  border-color: #0284c7 !important;
+  box-shadow: 0 0 0 3px rgba(2, 132, 199, 0.15) !important;
+}
+
+[data-theme="cyberpunk-light"] input::placeholder,
+[data-theme="cyberpunk-light"] textarea::placeholder {
+  color: #94a3b8 !important;
+}
+
+/* Custom cursor in light mode */
+[data-theme="cyberpunk-light"] .border-cyan-400\/50 {
+  border-color: rgba(2, 132, 199, 0.7) !important;
+}
+[data-theme="cyberpunk-light"] .border-cyan-300 {
+  border-color: rgba(2, 132, 199, 0.9) !important;
+}
+[data-theme="cyberpunk-light"] .bg-cyan-400\/10 {
+  background-color: rgba(2, 132, 199, 0.14) !important;
+}
+[data-theme="cyberpunk-light"] .bg-cyan-400 {
+  background-color: #0284c7 !important;
+}
+
+/* Lightbox Modal & Overlays in Light Mode */
+[data-theme="cyberpunk-light"] .bg-black\/80 {
+  background-color: rgba(15, 23, 42, 0.45) !important;
+}
+
+/* Preserve high contrast on image overlay text (e.g. Avatar card) */
+[data-theme="cyberpunk-light"] .absolute.bottom-4 .text-white {
+  color: #ffffff !important;
+}
+[data-theme="cyberpunk-light"] .absolute.bottom-4 .text-cyan-300 {
+  color: #67e8f9 !important;
+}
+[data-theme="cyberpunk-light"] .absolute.bottom-4 .text-slate-400 {
+  color: #cbd5e1 !important;
+}
+
+/* Preserve ribbon text contrast */
+[data-theme="cyberpunk-light"] .bg-gradient-to-l .text-slate-950 {
+  color: #ffffff !important;
+}
+
+/* Button & Nav link hover contrast in Light Mode */
+[data-theme="cyberpunk-light"] .hover\:text-white:hover {
+  color: #0f172a !important;
+}
+[data-theme="cyberpunk-light"] button.bg-gradient-to-r .hover\:text-white:hover,
+[data-theme="cyberpunk-light"] a.bg-gradient-to-r .hover\:text-white:hover {
+  color: #ffffff !important;
+}
+
+/* Floating Nebula Ambient Animation */
+@keyframes floatSlow1 {
+  0%, 100% {
+    transform: translate(0px, 0px) scale(1);
+  }
+  50% {
+    transform: translate(30px, -25px) scale(1.08);
+  }
+}
+
+@keyframes floatSlow2 {
+  0%, 100% {
+    transform: translate(0px, 0px) scale(1);
+  }
+  50% {
+    transform: translate(-35px, 20px) scale(0.95);
+  }
+}
+
+@keyframes floatSlow3 {
+  0%, 100% {
+    transform: translate(0px, 0px) scale(1);
+  }
+  50% {
+    transform: translate(25px, 35px) scale(1.05);
+  }
+}
+
+.animate-float-1 {
+  animation: floatSlow1 18s ease-in-out infinite;
+}
+
+.animate-float-2 {
+  animation: floatSlow2 22s ease-in-out infinite;
+}
+
+.animate-float-3 {
+  animation: floatSlow3 26s ease-in-out infinite;
+}
